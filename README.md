@@ -1,6 +1,6 @@
 # myzhihu
 
-> 知乎日报
+> 易源api新闻列表
 
 ## Build Setup
 
