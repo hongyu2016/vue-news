@@ -1,7 +1,7 @@
 {
   "name": "myzhihu",
   "version": "1.0.0",
-  "description": "知乎日报",
+  "description": "易源api新闻列表",
   "author": "羽",
   "private": true,
   "scripts": {
