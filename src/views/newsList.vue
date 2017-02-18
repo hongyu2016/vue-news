@@ -13,6 +13,9 @@
 
                     </b-list-group>
                 </b-card>
+                <div v-if="page>allPage">
+                    没有更多数据了
+                </div>
                 <loading v-show="loading"></loading>
             </div>
 
@@ -29,7 +32,8 @@
         data () {
             return {
                 newsApi:'http://route.showapi.com/109-35',
-                page:1,
+                page:0,
+                allPage:0,
                 newslLists:[],
                 loading:false,
                 channelTitle:'',
@@ -43,7 +47,7 @@
             '$route'(to,from){
                 if(to.name=='newsList'){
                     this.newslLists=[];
-                    this.getList();
+                    this.getList(true); //切换菜单时 页码初始化
                 }
             }
         },
@@ -68,26 +72,36 @@
 
                         })
             },*/
-            getList(){
-                this.busy = true;
+            getList(newChannel){
+                if(newChannel){
+                    this.page=0;
+                }
                 this.page++;
+                this.busy = true;
                 let _this=this;
                 this.channelTitle=this.$route.params.channelName;
                 //请求发送前 拦截器
                 this.axios.interceptors.request.use(function (config) {
-
                     _this.loading=true;  //打开loading动画
                     return config;
                 }, function (error) {
-
                     return Promise.reject(error);
                 });
                 this.axios.get(''+_this.newsApi+'?showapi_appid='+this.showapi_appid+'&showapi_sign='+this.showapi_sign+'&channelId='+this.$route.params.id+'&page='+_this.page+'')
                         .then(function(response){
-                            //_this.newslLists=response.data.showapi_res_body.pagebean.contentlist;
-                            _this.newslLists.push(response.data.showapi_res_body.pagebean.contentlist)  //
-                            console.log(_this.newslLists)
-                            _this.loading=false;  //关闭动画
+                            if(response.data.showapi_res_body.pagebean.contentlist.length<=0){
+
+                                _this.loading=false;  //关闭动画
+
+                            }else{
+                                _this.allPage=response.data.showapi_res_body.pagebean.allPages;//总页数
+                                console.log('***'+_this.allPage)
+                                //_this.newslLists=response.data.showapi_res_body.pagebean.contentlist;
+                                _this.newslLists.push(response.data.showapi_res_body.pagebean.contentlist)
+                                _this.loading=false;  //关闭动画
+
+                            }
+
                         })
                         .catch(function(error){
 
@@ -95,8 +109,10 @@
                 this.busy = false;
             },
 
-            loadMore: function() {
-                this.getList();
+            loadMore() {
+                if(this.page<=this.allPage){
+                    this.getList();
+                }
             }
         },
         mounted(){
