@@ -40,8 +40,6 @@
                             _this.$nextTick(function () {   //异步执行 DOM 更新。只要观察到数据变化，执行相应的动作
                                 //alert('更新完成')
                                 var mySwiper2 = new Swiper('#swiper-container2',{
-                                    //slidesPerView : 'auto'
-                                    //slidesPerView : 3.7,
                                     slidesPerColumn: 2,
                                     slidesPerView : 'auto',
                                     slidesPerGroup : 1
