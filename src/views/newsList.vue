@@ -52,26 +52,6 @@
             }
         },
         methods:{
-            /*getList(){
-                let _this=this;
-                this.channelTitle=this.$route.params.channelName;
-                //请求发送前 拦截器
-                this.axios.interceptors.request.use(function (config) {
-                    // Do something before request is sent
-                    _this.loading=true;  //打开loading动画
-                    return config;
-                }, function (error) {
-                    // Do something with request error
-                    return Promise.reject(error);
-                });
-                this.axios.get(''+_this.newsApi+'?showapi_appid='+this.showapi_appid+'&showapi_sign='+this.showapi_sign+'&channelId='+this.$route.params.id+'&page='+_this.page+'')
-                        .then(function(response){
-                            _this.newslLists=response.data.showapi_res_body.pagebean.contentlist;  //
-                        })
-                        .catch(function(error){
-
-                        })
-            },*/
             getList(newChannel){
                 if(newChannel){
                     this.page=0;

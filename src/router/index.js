@@ -10,7 +10,7 @@ import newsList from '../views/newsList.vue'
 import newsDetail from '../views/newsDetail.vue'
 
 export default new Router({
-  mode:'history',
+  //mode:'history',
   base:__dirname,
   linkActiveClass:"my-active", //自定义 路由选中类
   routes: [

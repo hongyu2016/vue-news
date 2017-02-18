@@ -42,6 +42,7 @@
                                 var mySwiper2 = new Swiper('#swiper-container2',{
                                     //slidesPerView : 'auto'
                                     //slidesPerView : 3.7,
+                                    slidesPerColumn: 2,
                                     slidesPerView : 'auto',
                                     slidesPerGroup : 1
                                     //autoplay : 500,
@@ -66,6 +67,8 @@
     .swiper-container {
         width: 100%;
         height: 100%;
+        border:solid 1px #ddd;
+        margin-bottom: 1rem;
     }
     .nav-ul {
         font-size: 16px;
@@ -73,6 +76,8 @@
         float: left;
         width: auto;
         transition: all 0.3s;
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
     .nav-ul .nav-ul-li {
         line-height: 40px;
